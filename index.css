@@ -1,0 +1,28 @@
+.cell {
+    height: 120px;
+    border: solid 1px black;
+    text-align: left;
+    position: relative;
+}
+
+.col-2 {
+    padding: 0;
+}
+
+#tableTop {
+    margin-top: 300px;;
+}
+
+#commandButtons > div > button {
+    width: 75px;
+}
+
+#robot {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-width: 12px !important;
+}

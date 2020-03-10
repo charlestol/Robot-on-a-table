@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Table top -->
+        <div id="tableTop" class="row justify-content-center">
+            <div class="col-2">
+                <div id="04" class="cell"></div>
+                <div id="03" class="cell"></div>
+                <div id="02" class="cell"></div>
+                <div id="01" class="cell"></div>
+                <div id="00" class="cell"></div>
+            </div>
+            <div class="col-2">
+                <div id="14" class="cell"></div>
+                <div id="13" class="cell"></div>
+                <div id="12" class="cell"></div>
+                <div id="11" class="cell"></div>
+                <div id="10" class="cell"></div>
+            </div>
+            <div class="col-2">
+                <div id="24" class="cell"></div>
+                <div id="23" class="cell"></div>
+                <div id="22" class="cell"></div>
+                <div id="21" class="cell"></div>
+                <div id="20" class="cell"></div>
+            </div>
+            <div class="col-2">
+                <div id="34" class="cell"></div>
+                <div id="33" class="cell"></div>
+                <div id="32" class="cell"></div>
+                <div id="31" class="cell"></div>
+                <div id="30" class="cell"></div>
+            </div>
+            <div class="col-2">
+                <div id="44" class="cell"></div>
+                <div id="43" class="cell"></div>
+                <div id="42" class="cell"></div>
+                <div id="41" class="cell"></div>
+                <div id="40" class="cell"></div>
+            </div>
+        </div>
+
+        <!-- Command buttons -->
+        <div id="commandButtons" class="mt-4 row justify-content-center">
+            <div class="col-sm-2 text-center">
+                <!-- Button trigger modal -->
+                <button type="button" id="place" class="btn btn-primary mb-3" data-toggle="modal" data-target="#placeRobotModal" onclick="robotActive = false">Place</button>            
+            </div>
+            <div id="activeRobotCommands" class="col-sm-6 col-lg-4 text-center">
+                <button type="button" id="move" class="robot-commands btn btn-primary mb-1" onclick="move()" disabled>Move</button>
+                <br>
+                <button type="button" id="left" class="robot-commands btn btn-primary" onclick="left()" disabled>Left</button>
+                <button type="button" id="report" class="robot-commands btn btn-primary" onclick="report()" disabled>Report</button>
+                <button type="button" id="right" class="robot-commands btn btn-primary" onclick="right()" disabled>Right</button>
+            </div>
+        </div>
+        
+        <!-- Report position -->
+        <div id="reportContainer" class="mt-5 text-center d-none">
+            <label for="positionReport">Position Report</label>
+            <div id="positionReport" class="">
+                <div class="mx-2">
+                    <label for="xReport">x: </label>
+                    <span id="xReport"></span>
+                </div>
+                <div class="mx-2">
+                    <label for="yReport">y: </label>
+                    <span id="yReport"></span>
+                </div>
+                <div class="mx-2"></div>
+                    <label for="fReport">f: </label>
+                    <span id="fReport"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="placeRobotModal" tabindex="-1" role="dialog" aria-labelledby="placeRobotModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="placeRobotModalLabel">Place Robot</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="robotActive = robotWasActivated ? true : false">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <p>(0,0) is the South-West corner *</p>
+                    <label for="x">x:</label>
+                    <select id="x" name="xPosition">
+                        <option value=0>0</option>
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                    </select>
+                    <label for="y">y:</label>
+                    <select id="y" name="yPosition">
+                        <option value=0>0</option>
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                    </select>
+                    <br>
+                    <label for="f">facing:</label>
+                    <select id="f" name="direction">
+                        <option value=180>North</option>
+                        <option value=0>South</option>
+                        <option value=90>West</option>
+                        <option value=270>East</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="robotActive = robotWasActivated ? true : false">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="placeRobot()" data-dismiss="modal">Place</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
