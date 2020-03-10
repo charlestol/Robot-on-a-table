@@ -43,9 +43,9 @@ const setFace = () => {
 
 // Place function to set Robot onto table
 const place = () => {
-    x = Number(document.getElementById('x').value);;
-    y = Number(document.getElementById('y').value);
-    f = Number(document.getElementById('f').value);
+    x = Number(document.getElementById('x').value) || x;
+    y = Number(document.getElementById('y').value) || y;
+    f = Number(document.getElementById('f').value) || f;
     setFace();
     robotActive = true;
     robotWasActivated = true;
@@ -128,3 +128,11 @@ const report = () => {
 $('#placeRobotModal').on('hidden.bs.modal', () => {
     robotActive = robotWasActivated ? true : false;
 });
+
+module.exports = {
+    place,
+    move,
+    left,
+    right,
+    report
+}
