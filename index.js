@@ -22,7 +22,7 @@ let robotWasActivated = false;
 // Boolean if Robot is currently active
 let robotActive = false;
 
-
+// NOTE: I made place(), move(), left(), and right() take in arguments for the sake of testing purposes
 
 // Place function to set Robot position values
 const place = (inX, inY, inF) => {
@@ -69,21 +69,25 @@ const right = inF => {
 
 // Report function to display Robot's current position
 const report = () => {
+    // Needed for console logging and index.test.js
     console.log(`REPORT ${x},${y},${facings[f]}-${f}`);
 }
 
 // Setting a rounded border which is used to indicate the direction the Robot is facing
 const setFace = () => {
+    // Border to act as direction indicator with respect to current angle
     let facingIndicator = {
         0: 'border-bottom',
         90: 'border-left',
         180: 'border-top',
         270: 'border-right'
     }
+    // When robot is being placed on the table for the first time
     if(!robot.classList.length) {
         robot.classList.add('border-primary','rounded-circle',facingIndicator[f]);
     } else {
         let face = robot.classList.item(2);
+        // If the facing direction has changed, update border class
         if(face !== facingIndicator[f]) {
             robot.classList.remove(face);
             robot.classList.add(facingIndicator[f]);
@@ -93,12 +97,16 @@ const setFace = () => {
 
 // User interactions
 $('#place').click(() => {
+    // Get position values from place modal on web interface
     let xSubmitted = Number(document.getElementById('x').value);
     let ySubmitted = Number(document.getElementById('y').value);
     let fSubmitted = Number(document.getElementById('f').value);
+    // Update Robot active state
     robotActive = true;
     robotWasActivated = true;
+    // Update global x,y,f
     place(xSubmitted,ySubmitted,fSubmitted);
+    // Set robot onto web interface table
     setFace();
     document.getElementById(`${x}${y}`).appendChild(robot);
     // Enabling other command buttons
@@ -113,6 +121,7 @@ $('#move').click(() => {
         let prevX = x;
         let prevY = y;
         move(x,y,f);
+        // If the robot position has updated, reflect that change onto the table
         if(x != prevX || y != prevY) {
             document.getElementById(`${prevX}${prevY}`).removeChild(robot);
             document.getElementById(`${x}${y}`).appendChild(robot);
@@ -137,6 +146,7 @@ $('#right').click(() => {
 $('#report').click(() => { 
     if(robotActive && robotWasActivated) {
         report(x,y,f);
+        // Display robot position on the web interface
         document.getElementById('xReport').textContent = x;
         document.getElementById('yReport').textContent = y;
         document.getElementById('fReport').textContent = facings[f];
@@ -146,9 +156,10 @@ $('#report').click(() => {
 
 // Handle closing Place Robot modal when clicking cancel, x, or outside and whether or not there's an active robot
 $('#placeRobotModal').on('hidden.bs.modal', () => {
+    // robotWasActive is a helper to robotActive to keep command button disabled while a robot has been present at least once
     robotActive = robotWasActivated ? true : false;
 });
-
+// Exporting functions for testing in index.test.js
 module.exports = {
     place,
     move,
