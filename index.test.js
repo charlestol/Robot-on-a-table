@@ -85,7 +85,7 @@ test('Test Case a)', () => {
     console.log(
         place(0,0,180),
         move(0,0,180),
-        report(0,1,180)
+        report()
     );
 
     expect(console.log.mock.calls[0][0]).toBe('PLACE 0,0,NORTH-180');
@@ -98,7 +98,7 @@ test('Test Case b)', () => {
     console.log(
         place(0,0,180),
         left(180),
-        report(0,0,90)
+        report()
     );
 
     expect(console.log.mock.calls[0][0]).toBe('PLACE 0,0,NORTH-180');
@@ -114,7 +114,7 @@ test('Test Case c)', () => {
         move(2,2,270),
         left(270),
         move(3,2,180),
-        report(3,3,180)
+        report()
     );
     
     expect(console.log.mock.calls[0][0]).toBe('PLACE 1,2,EAST-270');
@@ -136,11 +136,12 @@ test('Test Case: attemping to fall off left and top edge)', () => {
         move(0,0,180),
         move(0,1,180),
         move(0,2,180),
+        report(),
         move(0,3,180),
         move(0,4,180),
         right(180),
         left(270),
-        report(0,4,180)
+        report()
     );
 
     expect(console.log.mock.calls[0][0]).toBe('PLACE 0,0,WEST-90');
@@ -149,10 +150,11 @@ test('Test Case: attemping to fall off left and top edge)', () => {
     expect(console.log.mock.calls[3][0]).toBe('MOVE 0,1,NORTH-180');
     expect(console.log.mock.calls[4][0]).toBe('MOVE 0,2,NORTH-180');
     expect(console.log.mock.calls[5][0]).toBe('MOVE 0,3,NORTH-180');
-    expect(console.log.mock.calls[6][0]).toBe('MOVE 0,4,NORTH-180');
+    expect(console.log.mock.calls[6][0]).toBe('REPORT 0,3,NORTH-180');
     expect(console.log.mock.calls[7][0]).toBe('MOVE 0,4,NORTH-180');
-    expect(console.log.mock.calls[8][0]).toBe('RIGHT EAST-270');
-    expect(console.log.mock.calls[9][0]).toBe('LEFT NORTH-180');
-    expect(console.log.mock.calls[10][0]).toBe('REPORT 0,4,NORTH-180');
+    expect(console.log.mock.calls[8][0]).toBe('MOVE 0,4,NORTH-180');
+    expect(console.log.mock.calls[9][0]).toBe('RIGHT EAST-270');
+    expect(console.log.mock.calls[10][0]).toBe('LEFT NORTH-180');
+    expect(console.log.mock.calls[11][0]).toBe('REPORT 0,4,NORTH-180');
 });
 /******** End of testing table edges ********/
