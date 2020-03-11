@@ -34,36 +34,36 @@ const place = (inX, inY, inF) => {
 }
 
 // Move function to move Robot by one unit depending on direction facing
-const move = (inX, inY, inF) => {
-    switch(inF) {
+const move = () => {
+    switch(f) {
         // If trying to move past edge of table, do not increment/decrement
         case 0: // South
-            y = inY !== 0 ? inY - 1 : 0;
+            if(y !== 0) y--;
             break;
         case 90: // West
-            x = inX !== 0 ? inX - 1 : 0;
+            if(x !== 0) x--;
             break;
         case 180: // North
-            y = inY !== 4 ? inY + 1 : 4;
+            if(y !== 4) y++;
             break;
         case 270: // East
-            x = inX !== 4 ? inX + 1 : 4;
+            if(x !== 4) x++;
             break;
     }
     console.log(`MOVE ${x},${y},${facings[f]}-${f}`);
 }
 
 // Left function to rotate Robot counter-clockwise
-const left = inF => {
+const left = () => {
     // Handle f (angle) if f is currently 0 since left rotation subtracts 90 deg
-    f = inF === 0 ? 270 : inF-90;
+    f = f === 0 ? 270 : f-90;
     console.log(`LEFT ${facings[f]}-${f}`);
 }
 
 // Right function to rotate Robot clockwise
-const right = inF => {
+const right = () => {
     // Handle f (angle) if f is currently 270 since right rotation adds 90 deg
-    f = inF === 270 ? 0 : inF+90;
+    f = f === 270 ? 0 : f+90;
     console.log(`RIGHT ${facings[f]}-${f}`);
 }
 
@@ -98,14 +98,14 @@ const setFace = () => {
 // User interactions
 $('#place').click(() => {
     // Get position values from place modal on web interface
-    let xSubmitted = Number(document.getElementById('x').value);
-    let ySubmitted = Number(document.getElementById('y').value);
-    let fSubmitted = Number(document.getElementById('f').value);
+    let inX = Number(document.getElementById('x').value);
+    let inY = Number(document.getElementById('y').value);
+    let inF = Number(document.getElementById('f').value);
     // Update Robot active state
     robotActive = true;
     robotWasActivated = true;
     // Update global x,y,f
-    place(xSubmitted,ySubmitted,fSubmitted);
+    place(inX,inY,inF);
     // Set robot onto web interface table
     setFace();
     document.getElementById(`${x}${y}`).appendChild(robot);
@@ -120,7 +120,7 @@ $('#move').click(() => {
     if(robotActive && robotWasActivated) {
         let prevX = x;
         let prevY = y;
-        move(x,y,f);
+        move();
         // If the robot position has updated, reflect that change onto the table
         if(x != prevX || y != prevY) {
             document.getElementById(`${prevX}${prevY}`).removeChild(robot);
@@ -131,21 +131,21 @@ $('#move').click(() => {
 
 $('#left').click(() => { 
     if(robotActive && robotWasActivated) {
-        left(f); 
+        left(); 
         setFace();
     }
 });
 
 $('#right').click(() => { 
     if(robotActive && robotWasActivated) {
-        right(f);
+        right();
         setFace();
     }
 });
 
 $('#report').click(() => { 
     if(robotActive && robotWasActivated) {
-        report(x,y,f);
+        report();
         // Display robot position on the web interface
         document.getElementById('xReport').textContent = x;
         document.getElementById('yReport').textContent = y;
