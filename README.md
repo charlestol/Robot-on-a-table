@@ -3,7 +3,13 @@ A robot moving on a 5x5 grid
 
 ## Available Scripts
 
-In the project directory, you can run:
+To run tests, be in the project directory, 
+
+first do 
+
+### `npm install`
+
+then, you can run:
 
 ### `npm test`
 
