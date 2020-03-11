@@ -52,13 +52,13 @@
         <div id="commandButtons" class="mt-4 row justify-content-center">
             <div class="col-sm-2 text-center">
                 <!-- Button trigger modal -->
-                <button type="button" id="place" class="btn btn-primary mb-2" data-toggle="modal" data-target="#placeRobotModal" onclick="robotActive = false">Place</button>            
+                <button type="button" id="placeModal" class="btn btn-primary mb-2" data-toggle="modal" data-target="#placeRobotModal" onclick="robotActive = false">Place</button>            
             </div>
             <div id="activeRobotCommands" class="col-sm-8 col-lg-6 text-center">
-                <button type="button" id="move" class="robot-commands btn btn-primary mb-2" onclick="move()" disabled>Move</button>
-                <button type="button" id="left" class="robot-commands btn btn-primary mb-2" onclick="left()" disabled>Left</button>
-                <button type="button" id="report" class="robot-commands btn btn-primary mb-2" onclick="report()" disabled>Report</button>
-                <button type="button" id="right" class="robot-commands btn btn-primary mb-2" onclick="right()" disabled>Right</button>
+                <button type="button" id="move" class="robot-commands btn btn-primary mb-2" disabled>Move</button>
+                <button type="button" id="left" class="robot-commands btn btn-primary mb-2" disabled>Left</button>
+                <button type="button" id="report" class="robot-commands btn btn-primary mb-2" disabled>Report</button>
+                <button type="button" id="right" class="robot-commands btn btn-primary mb-2" disabled>Right</button>
             </div>
         </div>
         
@@ -120,7 +120,7 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="place()" data-dismiss="modal">Place</button>
+                <button type="button" id="place" class="btn btn-primary" data-dismiss="modal">Place</button>
                 </div>
             </div>
             </div>
