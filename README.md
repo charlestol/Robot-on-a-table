@@ -5,8 +5,6 @@ A robot moving on a 5x5 grid
 
 To run tests, be in the project directory, 
 
-first do 
-
 ### `npm install`
 
 then, you can run:
