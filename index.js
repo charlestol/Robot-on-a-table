@@ -22,8 +22,6 @@ let robotWasActivated = false;
 // Boolean if Robot is currently active
 let robotActive = false;
 
-// NOTE: I made place(), move(), left(), and right() take in arguments for the sake of testing purposes
-
 // Place function to set Robot position values
 const place = (inX, inY, inF) => {
     // If somehow, invalid inputs are passed in, keep coordinates to the default (0,0,NORTH)
